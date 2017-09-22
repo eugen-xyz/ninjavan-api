@@ -39,7 +39,7 @@ class Welcome extends CI_Controller {
 	}
 
 
-	public function get_waybill() {
+	public function get_waybill_print() {
 
 		$headers = array();
 	    $headers[0] = 'Authorization: Bearer 3VWwEl6gZ0ASZzrqW7obbd9bLmnSORbIGhaC9oRr';
@@ -48,14 +48,14 @@ class Welcome extends CI_Controller {
 
 	    $tids  = 'NVSGI4ASI000BIGHIT';  
 
-	    $order_data = array(
+	    $waybill_data = array(
 	    	'tids'			=> $tids, 
 	    	'h' 			=> 0, 	
 	    	's' 			=> 'A4',
 		);
 
 		$postData = '';
-		foreach($order_data as $k => $v) {
+		foreach($waybill_data as $k => $v) {
 
 	      $postData .= $k . '='.$v.'&'; 
 	   }
@@ -66,14 +66,13 @@ class Welcome extends CI_Controller {
 	    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-	    curl_setopt($ch, CURLOPT_USERAGENT, 'Codular Sample cURL Request');
+	    curl_setopt($ch, CURLOPT_USERAGENT, 'Ninjavan cURL Request');
 
 	    $body = curl_exec($ch);
 	    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	    curl_close($ch);
 
 	    print_r($body);
-
 
 		if($http_code == 200){
 	        $body = json_decode($body);
